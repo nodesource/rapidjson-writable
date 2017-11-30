@@ -27,8 +27,8 @@ void RapidjsonWritable::write(const char& chunk, size_t size) {
   uv_mutex_unlock(&work_.mutex);
 }
 
-void RapidjsonWritable::finish(bool wait) {
-  if (wait) uv_thread_join(&thread_);
+void RapidjsonWritable::wait() {
+  uv_thread_join(&thread_);
 }
 
 //

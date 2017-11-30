@@ -58,7 +58,7 @@ void write_chunks(std::istream& stream, RapidjsonWritable& writable) {
     usleep(1E5);
   } while(!stream.eof());
 
-  writable.finish(true);
+  writable.wait();
 }
 
 int main(int argc, const char* argv[]) {

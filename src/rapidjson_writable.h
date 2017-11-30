@@ -11,7 +11,7 @@ class RapidjsonWritable {
   public:
     RapidjsonWritable();
     void write(const char& chunk, size_t size);
-    void finish(bool wait);
+    void wait();
 
   protected:
     virtual void onparserFailure(rapidjson::Reader& reader) = 0;
