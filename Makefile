@@ -10,8 +10,13 @@ UV_FLAGS    = -pthread
 RAPIDJSON_DIR      = $(DEPS)/rapidjson
 RAPIDJSON_INCLUDES = $(RAPIDJSON_DIR)/include/
 
-LDFLAGS = -v $(UV_LIB)
 CCFLAGS = $(UV_FLAGS) -std=c++11 -g
+
+uname_S=$(shell uname -s)
+LIBS=
+ifeq (Linux, $(uname_S))
+LIBS=-lrt -ldl -lm -pthread
+endif
 
 SRC_DIR = $(ROOT)/src
 TST_DIR = $(ROOT)/test
@@ -24,9 +29,9 @@ INCS =-I$(UV_INCLUDES) -I$(RAPIDJSON_INCLUDES)
 
 TEST_DUMP = $(BIN_DIR)/test_dump
 
-$(TEST_DUMP): $(UV_LIB) $(RAPIDJSON_DIR) $(OBJS)
+$(TEST_DUMP): $(UV_LIB) $(OBJS) $(RAPIDJSON_DIR)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(LDFLAGS) $(OBJS) -o $@
+	$(CXX) $(LIBS) $(OBJS) $(UV_LIB) -o $@
 
 test_dump: $(TEST_DUMP)
 

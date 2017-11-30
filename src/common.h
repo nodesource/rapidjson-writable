@@ -3,6 +3,7 @@
 
 #include <uv.h>
 #include <vector>
+#include <string.h>
 
 typedef struct {
   char* buffer;
