@@ -60,6 +60,6 @@ clean:
 xcode:
 	@mkdir -p build
 	(cd build && rm -rf CMakeCache.txt CMakeFiles && \
-		CC=`xcrun -find cc` CXX=`xcrun -find c++` LDFLAGS='$(LDFLAGS)' cmake -G Xcode ..)
+		CC=`xcrun -find cc` CXX=`xcrun -find c++` LDFLAGS='$(UV_LIB)' cmake -G Xcode ..)
 
 .PHONY: main xcode
