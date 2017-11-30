@@ -28,13 +28,11 @@ void RapidjsonWritable::write(const char& chunk, size_t size) {
 }
 
 void RapidjsonWritable::finish(bool wait) {
-  const char eof = '\0';
-  write(eof, 1);
   if (wait) uv_thread_join(&thread_);
 }
 
 //
-// Parser runs on background thread
+// Parser and cleanup runs on background thread
 //
 void RapidjsonWritable::startParser_(void* data) {
   RapidjsonWritable* self = static_cast<RapidjsonWritable*>(data);
@@ -44,11 +42,23 @@ void RapidjsonWritable::startParser_(void* data) {
   while (!self->reader_.IterativeParseComplete()) {
     self->reader_.IterativeParseNext<rapidjson::kParseDefaultFlags>(self->stream_, self->handler_);
     if (self->reader_.HasParseError()) {
+      self->cleanup_();
       self->onparserFailure(self->reader_);
       return;
     } else {
       self->onparsedToken(self->handler_);
     }
   }
+  self->cleanup_();
   self->onparseComplete();
+}
+
+void RapidjsonWritable::cleanup_() {
+  uv_mutex_lock(&work_.mutex);
+  {
+    for (chunk_t chunk : work_.chunks) {
+      delete[] chunk.buffer;
+    }
+  }
+  uv_mutex_unlock(&work_.mutex);
 }

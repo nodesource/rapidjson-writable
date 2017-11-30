@@ -26,6 +26,7 @@ class RapidjsonWritable {
     rapidjson::Reader reader_;
     IStreamWrapper stream_;
 
+    void cleanup_();
     static void startParser_(void* data);
 };
 #endif
