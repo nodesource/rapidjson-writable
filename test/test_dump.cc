@@ -1,16 +1,11 @@
-# rapidjson-writable
-
-API to rapidjson that supports writing data asynchronously. Uses libuv to block the parser thread while waiting for data.
-
-```cpp
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
 
-#define CHUNK_SIZE 64
+#include "../src/rapidjson_writable.h"
+#include "util.h"
 
-#include "rapidjson_writable.h"
-#include "util.h" // see test/util.h
+#define CHUNK_SIZE 64
 
 class DumpWritable : public RapidjsonWritable {
   void onparserFailure(rapidjson::Reader& reader) {
@@ -39,20 +34,11 @@ void write_chunks(std::istream& stream, RapidjsonWritable& writable) {
 
 int main(int argc, const char* argv[]) {
   DumpWritable writable;
-  const char* file = argv[1];
-  std::ifstream ifs(file);
-  write_chunks(ifs, writable);
+  if (argc >= 2) {
+    const char* file = argv[1];
+    std::ifstream ifs(file);
+    write_chunks(ifs, writable);
+  } else {
+    write_chunks(std::cin, writable);
+  }
 }
-```
-
-## Testing Manually
-
-### Dump Tokens
-
-```sh
-make clean && make test_dump
-
-./bin/test_dump file.json
-# or
-cat file.json | ./bin/test_dump
-```

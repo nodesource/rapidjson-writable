@@ -1,5 +1,5 @@
-#ifndef RAPIDJSON_SAXHANDLER_H
-#define RAPIDJSON_SAXHANDLER_H
+#ifndef RAPIDJSON_WRITABLE_SAXHANDLER_H
+#define RAPIDJSON_WRITABLE_SAXHANDLER_H
 
 #include "rapidjson/rapidjson.h"
 #include <string>

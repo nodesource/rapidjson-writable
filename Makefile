@@ -20,11 +20,15 @@ BIN_DIR = $(ROOT)/bin
 
 SRCS := $(wildcard $(SRC_DIR)/*.cc) $(wildcard $(TST_DIR)/*.cc)
 OBJS = $(SRCS:.cc=.o)
-INCS =-I$(UV_INCLUDES) -I$(RAPIDJSON_INCLUDES) -I$(SRC_DIR)
+INCS =-I$(UV_INCLUDES) -I$(RAPIDJSON_INCLUDES)
 
-TEST = $(BIN_DIR)/test
+TEST_DUMP = $(BIN_DIR)/test_dump
 
-test: $(TEST)
+$(TEST_DUMP): $(UV_LIB) $(RAPIDJSON_DIR) $(OBJS)
+	@mkdir -p $(BIN_DIR)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $@
+
+test_dump: $(TEST_DUMP)
 
 $(UV_PATH):
 	git clone git@github.com:libuv/libuv.git $@ && \
@@ -40,10 +44,6 @@ $(UV_LIB): $(UV_PATH)
 
 $(RAPIDJSON_DIR):
 	git clone git@github.com:miloyip/rapidjson.git $@
-
-$(TEST): $(UV_LIB) $(RAPIDJSON_DIR) $(OBJS)
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(LDFLAGS) $(OBJS) -o $@
 
 .SUFFIXES: .cc .o
 .cc.o:

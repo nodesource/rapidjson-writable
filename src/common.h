@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef RAPIDJSON_WRITABLE_COMMON_H
+#define RAPIDJSON_WRITABLE_COMMON_H
 
 #include <uv.h>
 #include <vector>
