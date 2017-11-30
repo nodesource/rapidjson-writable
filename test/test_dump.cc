@@ -5,7 +5,7 @@
 #include "../src/rapidjson_writable.h"
 #include "util.h"
 
-#define CHUNK_SIZE 64
+#define CHUNK_SIZE 640000
 
 class DumpWritable : public RapidjsonWritable {
   void onparserFailure(rapidjson::Reader& reader) {

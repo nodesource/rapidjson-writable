@@ -43,3 +43,9 @@ add_executable(test_dump
   ${rapidjson_headers} ${rapidjson_error_headers} ${rapidjson_internal_headers} ${rapidjson_msinttypes_headers}
 )
 
+add_executable(test_minify
+  ${rapidjson_writable_sources} ${rapidjson_writable_headers}
+  ${PROJECT_TEST_DIR}/test_minify.cc ${rapidjson_writable_test_headers}
+  ${uv_sources} ${uv_unix_sources} ${uv_headers}
+  ${rapidjson_headers} ${rapidjson_error_headers} ${rapidjson_internal_headers} ${rapidjson_msinttypes_headers}
+)

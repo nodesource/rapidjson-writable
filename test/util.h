@@ -52,4 +52,27 @@ void printParserFailure(rapidjson::Reader& reader) {
   fprintf(stderr, "Parser Error at offset %ld: [ %s ]\n", offset , rapidjson::GetParseError_En(errorCode));
 }
 
+void echoParsedToken(SaxHandler& handler, bool addComma) {
+  if (addComma) fprintf(stdout, ",");
+  switch (handler.type) {
+    case Bool   : fprintf(stdout, "%s", handler.boolVal ? "true": "false"); break;
+    case Int    : fprintf(stdout, "%d", handler.intVal); break;
+    case Uint   : fprintf(stdout, "%d", handler.uintVal); break;
+    case Int64  : fprintf(stdout, "%lld", handler.int64Val); break;
+    case Uint64 : fprintf(stdout, "%llu", handler.uint64Val); break;
+    case Double : fprintf(stdout, "%f", handler.doubleVal); break;
+    case Number : fprintf(stdout, "%s", handler.stringVal.c_str()); break;
+    case String : fprintf(stdout, "\"%s\"", handler.stringVal.c_str()); break;
+    case Null   : fprintf(stdout, "null"); break;
+
+    // Parser Signal types
+    case Key         : fprintf(stdout, "\"%s\": ", handler.stringVal.c_str()); break;
+    case StartObject : fprintf(stdout, "{"); break;
+    case EndObject   : fprintf(stdout, "}"); break;
+    case StartArray  : fprintf(stdout, "["); break;
+    case EndArray    : fprintf(stdout, "]"); break;
+  }
+  fflush(stdout);
+}
+
 #endif
