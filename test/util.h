@@ -27,13 +27,13 @@ std::string jsonTypeToString(JsonType type) {
 }
 
 void printParsedToken(SaxHandler& handler) {
-  fprintf(stderr, "Token: %s", jsonTypeToString(handler.type).c_str());
+  fprintf(stdout, "Token: %s", jsonTypeToString(handler.type).c_str());
   switch (handler.type) {
     case Bool   : fprintf(stdout, " %s", handler.boolVal ? "true": "false"); break;
     case Int    : fprintf(stdout, " %d", handler.intVal); break;
     case Uint   : fprintf(stdout, " %d", handler.uintVal); break;
     case Int64  : fprintf(stdout, " %lld", handler.int64Val); break;
-    case Uint64 : fprintf(stdout, " %lld", handler.uint64Val); break;
+    case Uint64 : fprintf(stdout, " %llu", handler.uint64Val); break;
     case Double : fprintf(stdout, " %f", handler.doubleVal); break;
     case Number:
     case String:
