@@ -5,8 +5,6 @@
 #include "../src/rapidjson_writable.h"
 #include "util.h"
 
-#define CHUNK_SIZE 640
-
 class MinifyWritable : public RapidjsonWritable {
   public:
     MinifyWritable() : nextKeyNeedsComma_(), insideArray_(), passedFirstArrayElement_() {}
@@ -42,7 +40,7 @@ class MinifyWritable : public RapidjsonWritable {
     }
 
     void onparseComplete() {
-      fprintf(stderr, "OK\n");
+      fprintf(stderr, "OK");
     }
 
     bool nextKeyNeedsComma_;
@@ -50,9 +48,9 @@ class MinifyWritable : public RapidjsonWritable {
     bool passedFirstArrayElement_;
 };
 
-void write_chunks(std::istream& stream, RapidjsonWritable& writable) {
+void write_chunks(std::istream& stream, RapidjsonWritable& writable, size_t chunkSize) {
   do {
-    std::vector<char> buffer (CHUNK_SIZE, 0);
+    std::vector<char> buffer (chunkSize, 0);
     stream.read(buffer.data(), buffer.size());
     writable.write(*buffer.data(), buffer.size());
     usleep(1E5);
@@ -63,11 +61,12 @@ void write_chunks(std::istream& stream, RapidjsonWritable& writable) {
 
 int main(int argc, const char* argv[]) {
   MinifyWritable writable;
-  if (argc >= 2) {
-    const char* file = argv[1];
+  const size_t chunkSize = atoi(argv[1]);
+  if (argc >= 3) {
+    const char* file = argv[2];
     std::ifstream ifs(file);
-    write_chunks(ifs, writable);
+    write_chunks(ifs, writable, chunkSize);
   } else {
-    write_chunks(std::cin, writable);
+    write_chunks(std::cin, writable, chunkSize);
   }
 }
