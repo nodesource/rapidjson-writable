@@ -6,10 +6,14 @@
 // write and finish run on Writer (main) thread
 //
 RapidjsonWritable::RapidjsonWritable() : stream_(work_) {
+}
+
+void* RapidjsonWritable::init(void* ok) {
   RAPIDJSON_WRITABLE_ASSERT(0 == uv_mutex_init(&work_.mutex), "unable to init mutex");
   RAPIDJSON_WRITABLE_ASSERT(0 == uv_cond_init(&work_.cv), "unable to init convar");
   uv_thread_create(&thread_, startParser_, this);
   work_.thread = thread_;
+  return ok; 
 }
 
 void RapidjsonWritable::write(const char& chunk, size_t size) {

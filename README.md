@@ -40,6 +40,7 @@ void write_chunks(std::istream& stream, RapidjsonWritable& writable) {
 
 int main(int argc, const char* argv[]) {
   DumpWritable writable;
+  writable.init(nullptr);
   const char* file = argv[1];
   std::ifstream ifs(file);
   write_chunks(ifs, writable);

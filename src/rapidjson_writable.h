@@ -14,6 +14,7 @@
 class RapidjsonWritable {
   public:
     RapidjsonWritable();
+    void* init(void* ok);
     void write(const char& chunk, size_t size);
     void wait();
 
