@@ -2,7 +2,7 @@
 #define RAPIDJSON_WRITABLE_ISTREAMWRAPPER_H
 
 #include <assert.h>
-#include "common.h"
+#include "rapidjson_writable_common.h"
 #include "rapidjson/istreamwrapper.h"
 
 class IStreamWrapper {

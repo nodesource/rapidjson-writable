@@ -1,7 +1,7 @@
 #ifndef RAPIDJSON_WRITABLE_WRITABLE_H
 #define RAPIDJSON_WRITABLE_WRITABLE_H
 
-#include "common.h"
+#include "rapidjson_writable_common.h"
 #include <assert.h>
 #include "rapidjson_istreamwrapper.h"
 #include "rapidjson_saxhandler.h"
