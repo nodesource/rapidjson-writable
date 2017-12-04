@@ -11,6 +11,8 @@
 #define RAPIDJSON_WRITABLE_ASSERT(cond, s) assert(cond && s)
 #endif
 
+namespace rapidjson_writable {
+
 class RapidjsonWritable {
   public:
     RapidjsonWritable();
@@ -34,4 +36,6 @@ class RapidjsonWritable {
     void cleanup_();
     static void startParser_(void* data);
 };
+
+}
 #endif

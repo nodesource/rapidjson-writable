@@ -4,6 +4,8 @@
 #include "rapidjson/rapidjson.h"
 #include <string>
 
+namespace rapidjson_writable {
+
 enum JsonType {
   // Value types
   Null,
@@ -122,5 +124,7 @@ struct SaxHandler {
     SaxHandler(const SaxHandler& noCopyConstruction);
     SaxHandler& operator=(const SaxHandler& noAssignment);
 };
+
+}
 
 #endif

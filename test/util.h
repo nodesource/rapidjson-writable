@@ -4,6 +4,8 @@
 #include "../src/rapidjson_writable.h"
 #include "rapidjson/error/en.h"
 
+using namespace rapidjson_writable;
+
 std::string jsonTypeToString(JsonType type) {
   switch(type) {
     // Value types

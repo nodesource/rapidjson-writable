@@ -5,6 +5,8 @@
 #include <vector>
 #include <string.h>
 
+namespace rapidjson_writable {
+
 typedef struct {
   char* buffer;
   size_t size;
@@ -22,5 +24,7 @@ inline char* copy_buffer(const char* buffer, size_t size) {
   char* cpy = new char[size];
   strncpy(cpy, buffer, size);
   return cpy;
+}
+
 }
 #endif

@@ -2,11 +2,12 @@
 
 #include <string.h>
 
+namespace rapidjson_writable {
+
 //
 // write and finish run on Writer (main) thread
 //
-RapidjsonWritable::RapidjsonWritable() : stream_(work_) {
-}
+RapidjsonWritable::RapidjsonWritable() : stream_(work_) {}
 
 void* RapidjsonWritable::init(void* ok) {
   RAPIDJSON_WRITABLE_ASSERT(0 == uv_mutex_init(&work_.mutex), "unable to init mutex");
@@ -65,4 +66,6 @@ void RapidjsonWritable::cleanup_() {
     }
   }
   uv_mutex_unlock(&work_.mutex);
+}
+
 }

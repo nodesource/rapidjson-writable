@@ -12,6 +12,8 @@ API to rapidjson that supports writing data asynchronously. Uses libuv to block 
 #include "rapidjson_writable.h"
 #include "util.h" // see test/util.h
 
+using namespace rapidjson_writable;
+
 class DumpWritable : public RapidjsonWritable {
   void onparserFailure(rapidjson::Reader& reader) {
     printParserFailure(reader);

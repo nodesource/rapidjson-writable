@@ -5,6 +5,8 @@
 #include "../src/rapidjson_writable.h"
 #include "util.h"
 
+using namespace rapidjson_writable;
+
 class MinifyWritable : public RapidjsonWritable {
   public:
     MinifyWritable() : nextKeyNeedsComma_(), insideArray_(), passedFirstArrayElement_() {}

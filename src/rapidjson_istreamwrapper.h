@@ -5,6 +5,8 @@
 #include "rapidjson_writable_common.h"
 #include "rapidjson/istreamwrapper.h"
 
+namespace rapidjson_writable {
+
 class IStreamWrapper {
   public:
     typedef char Ch;
@@ -69,5 +71,7 @@ class IStreamWrapper {
     worker_t& work_;
     size_t count_;
 };
+
+}
 
 #endif

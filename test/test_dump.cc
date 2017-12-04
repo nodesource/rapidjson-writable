@@ -7,6 +7,8 @@
 
 #define CHUNK_SIZE 640000
 
+using namespace rapidjson_writable;
+
 class DumpWritable : public RapidjsonWritable {
   void onparserFailure(rapidjson::Reader& reader) {
     printParserFailure(reader);
