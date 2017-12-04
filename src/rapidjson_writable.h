@@ -7,6 +7,10 @@
 #include "rapidjson_saxhandler.h"
 #include "rapidjson/reader.h"
 
+#ifndef RAPIDJSON_WRITABLE_ASSERT
+#define RAPIDJSON_WRITABLE_ASSERT(cond, s) assert(cond && s)
+#endif
+
 class RapidjsonWritable {
   public:
     RapidjsonWritable();
