@@ -4,7 +4,7 @@ DEPS        = $(ROOT)/deps
 -include rapidjson.mk
 -include uv.mk
 
-CCFLAGS = $(UV_FLAGS) -std=c++11 -g
+CCFLAGS = $(UV_FLAGS) -std=c++11 -g -Wno-format
 
 INC_DIR = $(ROOT)/include
 TST_DIR = $(ROOT)/test

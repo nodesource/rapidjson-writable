@@ -25,7 +25,7 @@ class RapidjsonWritable {
       RAPIDJSON_WRITABLE_ASSERT(0 == uv_cond_init(&work_.cv), "unable to init convar");
       uv_thread_create(&thread_, startParser_, this);
       work_.thread = thread_;
-      return ok; 
+      return ok;
     }
 
     void write(const char& chunk, size_t size) {
@@ -34,8 +34,8 @@ class RapidjsonWritable {
       {
         work_.chunks.push_back({
           .buffer = buffer,
-          .idx = 0,
-          .size = size
+          .size = size,
+          .idx = 0
         });
 
         uv_cond_signal(&work_.cv);
