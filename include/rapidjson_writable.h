@@ -95,6 +95,9 @@ class RapidjsonWritable {
     SaxHandler handler_;
     rapidjson::Reader reader_;
     IStreamWrapper stream_;
+
+    RapidjsonWritable(const RapidjsonWritable& noCopyConstruction);
+    RapidjsonWritable& operator=(const RapidjsonWritable& noAssignment);
 };
 
 }
