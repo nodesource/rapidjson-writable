@@ -9,8 +9,9 @@ API to rapidjson that supports writing data asynchronously. Uses libuv to block 
 
 #define CHUNK_SIZE 64
 
+#include "test_assert.h"  // see test/test_assert.h
+#include "util.h"         // see test/util.h
 #include "rapidjson_writable.h"
-#include "util.h" // see test/util.h
 
 using namespace rapidjson_writable;
 
@@ -42,7 +43,15 @@ void write_chunks(std::istream& stream, RapidjsonWritable& writable) {
 
 int main(int argc, const char* argv[]) {
   DumpWritable writable;
-  writable.init(nullptr);
+  DumpWritable writable;
+  const TestWritableResult* r = writable.init(TestWritableResult::OK());
+  if (r->hasError) {
+    fprintf(stderr, "Encountered writable init error: %s\n", r->errorMsg);
+    delete r;
+    return 1;
+  }
+  delete r;
+
   const char* file = argv[1];
   std::ifstream ifs(file);
   write_chunks(ifs, writable);

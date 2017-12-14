@@ -1,8 +1,12 @@
 #ifndef TEST_UTIL_H
 #define TEST_UTIL_H
 
-#include "rapidjson_writable.h"
 #include "rapidjson/error/en.h"
+
+// Need to include this before the writable to be able to override
+// RAPIDJSON_WRITABLE_ASSERT
+#include "test_assert.h"
+#include "rapidjson_writable.h"
 
 using namespace rapidjson_writable;
 

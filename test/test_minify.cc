@@ -63,7 +63,14 @@ void write_chunks(std::istream& stream, RapidjsonWritable& writable, size_t chun
 
 int main(int argc, const char* argv[]) {
   MinifyWritable writable;
-  writable.init(nullptr);
+  const TestWritableResult* r = writable.init(TestWritableResult::OK());
+  if (r->hasError) {
+    fprintf(stderr, "Encountered writable init error: %s\n", r->errorMsg);
+    delete r;
+    return 1;
+  }
+  delete r;
+
   const size_t chunkSize = atoi(argv[1]);
   if (argc >= 3) {
     const char* file = argv[2];

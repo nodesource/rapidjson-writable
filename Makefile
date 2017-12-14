@@ -38,7 +38,7 @@ test_minify: $(TEST_MINIFY)
 
 clean:
 	@rm -f $(TEST_DUMP) $(TST_DUMP_OBJS) \
-		$(TEST_MINIFY) $(TST_MINFY_OBJS)
+		$(TEST_MINIFY) $(TST_MINIFY_OBJS)
 	@rm -rf $(ROOT)/build/CMakeCache.txt $(ROOT)/build/CMakeFiles
 
 xcode:

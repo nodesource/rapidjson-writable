@@ -20,7 +20,8 @@ class RapidjsonWritable {
     //
     // init, write and wait run on Writer (main) thread
     //
-    void* init(void* ok) {
+    template <typename T>
+    const T* init(const T* ok) {
       RAPIDJSON_WRITABLE_ASSERT(0 == uv_mutex_init(&work_.mutex), "unable to init mutex");
       RAPIDJSON_WRITABLE_ASSERT(0 == uv_cond_init(&work_.cv), "unable to init convar");
       uv_thread_create(&thread_, startParser_, this);
