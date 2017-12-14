@@ -13,21 +13,8 @@ set(CMAKE_*_LINKER_FLAGS " -v ${UV_LIB}")
 
 ## Deps
 
-# libuv
-include_directories(${PROJECT_SOURCE_DIR}/../deps/uv/include)
-include_directories(${PROJECT_SOURCE_DIR}/../deps/uv/include/*)
-include_directories(${PROJECT_SOURCE_DIR}/../deps/uv/src)
-include_directories(${PROJECT_SOURCE_DIR}/../deps/uv/src/*)
-file(GLOB uv_headers ${PROJECT_SOURCE_DIR}/../deps/uv/include/*)
-file(GLOB uv_headers ${PROJECT_SOURCE_DIR}/../deps/uv/include/*)
-file(GLOB uv_sources ${PROJECT_SOURCE_DIR}/../deps/uv/src/*)
-source_group(deps\\uv\\include FILES ${uv_headers})
-source_group(deps\\uv\\src FILES ${uv_sources})
-
-# rapidjson
-include_directories("${PROJECT_SOURCE_DIR}/../deps/rapidjson/include")
-file(GLOB rapidjson_headers ${PROJECT_SOURCE_DIR}/../deps/rapidjson/include/rapidjson/*)
-source_group(deps\\rapidjson FILES ${rapidjson_headers})
+include(${CMAKE_CURRENT_SOURCE_DIR}/uv.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/rapidjson.cmake)
 
 ## Project
 
@@ -51,5 +38,5 @@ add_executable(test_dump
 add_executable(test_minify
   ${rapidjson_writable_sources} ${rapidjson_writable_headers}
   ${PROJECT_TEST_DIR}/test_minify.cc ${rapidjson_writable_test_headers}
-  ${rapidjson_headers}
+  ${rapidjson_headers} ${uv_headers} ${uv_sources}
 )
