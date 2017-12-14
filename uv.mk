@@ -11,7 +11,7 @@ LIBS=-lrt -ldl -lm -pthread
 endif
 
 $(UV_PATH):
-	git clone git@github.com:libuv/libuv.git $@ && \
+	git clone https://github.com/libuv/libuv.git $@ && \
 	cd $(UV_PATH) &&                               \
 	git checkout tags/v1.16.1
 
