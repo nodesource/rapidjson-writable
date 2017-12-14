@@ -6,13 +6,11 @@ DEPS        = $(ROOT)/deps
 
 CCFLAGS = $(UV_FLAGS) -std=c++11 -g
 
-SRC_DIR = $(ROOT)/src
+INC_DIR = $(ROOT)/include
 TST_DIR = $(ROOT)/test
 BIN_DIR = $(ROOT)/bin
 
-SRCS := $(wildcard $(SRC_DIR)/*.cc)
-OBJS = $(SRCS:.cc=.o)
-INCS =-I$(UV_INCLUDES) -I$(RAPIDJSON_INCLUDES)
+INCS =-I$(UV_INCLUDES) -I$(RAPIDJSON_INCLUDES) -I$(INC_DIR)
 
 TEST_DUMP = $(BIN_DIR)/test_dump
 TST_DUMP_SRCS=$(TST_DIR)/test_dump.cc
@@ -22,13 +20,13 @@ TEST_MINIFY = $(BIN_DIR)/test_minify
 TST_MINIFY_SRCS=$(TST_DIR)/test_minify.cc
 TST_MINIFY_OBJS=$(TST_MINIFY_SRCS:.cc=.o)
 
-$(TEST_DUMP): $(UV_LIB) $(OBJS) $(TST_DUMP_OBJS) $(RAPIDJSON)
+$(TEST_DUMP): $(UV_LIB) $(TST_DUMP_OBJS) $(RAPIDJSON)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(LIBS) $(OBJS) $(TST_DUMP_OBJS) $(UV_LIB) -o $@
+	$(CXX) $(LIBS) $(TST_DUMP_OBJS) $(UV_LIB) -o $@
 
-$(TEST_MINIFY): $(UV_LIB) $(OBJS) $(TST_MINIFY_OBJS) $(RAPIDJSON)
+$(TEST_MINIFY): $(UV_LIB) $(TST_MINIFY_OBJS) $(RAPIDJSON)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(LIBS) $(OBJS) $(TST_MINIFY_OBJS) $(UV_LIB) -o $@
+	$(CXX) $(LIBS) $(TST_MINIFY_OBJS) $(UV_LIB) -o $@
 
 test_dump: $(TEST_DUMP)
 test_minify: $(TEST_MINIFY)
@@ -39,8 +37,7 @@ test_minify: $(TEST_MINIFY)
 	$(CXX) $< $(CCFLAGS) $(INCS) -c -o $@
 
 clean:
-	@rm -f $(OBJS) \
-		$(TEST_DUMP) $(TST_DUMP_OBJS) \
+	@rm -f $(TEST_DUMP) $(TST_DUMP_OBJS) \
 		$(TEST_MINIFY) $(TST_MINFY_OBJS)
 	@rm -rf $(ROOT)/build/CMakeCache.txt $(ROOT)/build/CMakeFiles
 

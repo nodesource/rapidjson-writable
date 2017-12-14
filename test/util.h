@@ -1,7 +1,7 @@
 #ifndef TEST_UTIL_H
 #define TEST_UTIL_H
 
-#include "../src/rapidjson_writable.h"
+#include "rapidjson_writable.h"
 #include "rapidjson/error/en.h"
 
 using namespace rapidjson_writable;

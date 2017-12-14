@@ -2,7 +2,7 @@
 #include <fstream>
 #include <unistd.h>
 
-#include "../src/rapidjson_writable.h"
+#include "rapidjson_writable.h"
 #include "util.h"
 
 using namespace rapidjson_writable;

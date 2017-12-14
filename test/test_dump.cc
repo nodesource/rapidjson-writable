@@ -2,7 +2,7 @@
 #include <fstream>
 #include <unistd.h>
 
-#include "../src/rapidjson_writable.h"
+#include "rapidjson_writable.h"
 #include "util.h"
 
 #define CHUNK_SIZE 640000
