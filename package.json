@@ -2,6 +2,7 @@
   "name": "rapidjson-writable",
   "version": "0.0.0",
   "description": "API to rapidjson that supports writing data asynchronously.",
+  "files": [ "include/" ],
   "scripts": {
     "pretest": "make test_minify",
     "test": "tape test/*.js"
@@ -15,7 +16,7 @@
   "devDependencies": {
     "tape": "~4.8.0"
   },
-  "keywords": [],
+  "keywords": ["JSON", "parse", "rapidjson", "async", "stream", "writable" ],
   "author": {
     "name": "Thorsten Lorenz",
     "email": "thlorenz@gmx.de",
@@ -26,6 +27,6 @@
     "url": "https://github.com/nodesource/rapidjson-writable/blob/master/LICENSE"
   },
   "engine": {
-    "node": ">=6"
+    "node": ">=4"
   }
 }
