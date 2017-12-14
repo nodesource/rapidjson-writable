@@ -1,4 +1,4 @@
-# rapidjson-writable
+# rapidjson-writable [![build status](https://secure.travis-ci.org/nodesource/rapidjson-writable.svg?branch=master)](http://travis-ci.org/nodesource/rapidjson-writable)
 
 API to rapidjson that supports writing data asynchronously. Uses libuv to block the parser thread while waiting for data.
 
