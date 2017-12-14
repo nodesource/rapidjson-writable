@@ -2,7 +2,7 @@ ROOT        = $(shell pwd)
 DEPS        = $(ROOT)/deps
 
 -include rapidjson.mk
--include libuv.mk
+-include uv.mk
 
 CCFLAGS = $(UV_FLAGS) -std=c++11 -g
 
@@ -26,7 +26,7 @@ $(TEST_DUMP): $(UV_LIB) $(OBJS) $(TST_DUMP_OBJS) $(RAPIDJSON)
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(LIBS) $(OBJS) $(TST_DUMP_OBJS) $(UV_LIB) -o $@
 
-$(TEST_MINIFY): $(UV_LIB) $(OBJS) $(TST_MINIFY_OBJS) $(RAPIDJSON) 
+$(TEST_MINIFY): $(UV_LIB) $(OBJS) $(TST_MINIFY_OBJS) $(RAPIDJSON)
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(LIBS) $(OBJS) $(TST_MINIFY_OBJS) $(UV_LIB) -o $@
 
@@ -41,11 +41,18 @@ test_minify: $(TEST_MINIFY)
 clean:
 	@rm -f $(OBJS) \
 		$(TEST_DUMP) $(TST_DUMP_OBJS) \
-		$(TEST_MINIFY) $(TST_MINFY_OBJS) 
+		$(TEST_MINIFY) $(TST_MINFY_OBJS)
+	@rm -rf $(ROOT)/build/CMakeCache.txt $(ROOT)/build/CMakeFiles
 
 xcode:
 	@mkdir -p build
-	(cd build && rm -rf CMakeCache.txt CMakeFiles && \
+	(cd build && \
 		CC=`xcrun -find cc` CXX=`xcrun -find c++` LDFLAGS='$(UV_LIB)' cmake -G Xcode ..)
+
+ninja:
+	@mkdir -p build
+	(cd build && \
+		CC=`xcrun -find cc` CXX=`xcrun -find c++` LDFLAGS='$(UV_LIB)' cmake -G Ninja ..) && \
+	ninja -C build
 
 .PHONY: test_dump test_minify xcode
