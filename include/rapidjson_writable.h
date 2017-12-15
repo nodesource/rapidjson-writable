@@ -15,7 +15,8 @@ namespace rapidjson_writable {
 
 class RapidjsonWritable {
   public:
-    RapidjsonWritable() : stream_(work_) {}
+    RapidjsonWritable() 
+      : stream_(work_), initialized_(false) {}
 
     //
     // init, write and wait run on Writer (main) thread
@@ -26,6 +27,7 @@ class RapidjsonWritable {
       RAPIDJSON_WRITABLE_ASSERT(0 == uv_cond_init(&work_.cv), "unable to init convar");
       uv_thread_create(&thread_, startParser_, this);
       work_.thread = thread_;
+      initialized_ = true;
       return ok;
     }
 
@@ -47,6 +49,8 @@ class RapidjsonWritable {
     void wait() {
       uv_thread_join(&thread_);
     }
+
+    bool initialized() { return initialized_; }
 
   private:
     //
@@ -96,6 +100,7 @@ class RapidjsonWritable {
     SaxHandler handler_;
     rapidjson::Reader reader_;
     IStreamWrapper stream_;
+    bool initialized_;
 
     RapidjsonWritable(const RapidjsonWritable& noCopyConstruction);
     RapidjsonWritable& operator=(const RapidjsonWritable& noAssignment);
