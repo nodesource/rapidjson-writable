@@ -43,7 +43,6 @@ void write_chunks(std::istream& stream, RapidjsonWritable& writable) {
 
 int main(int argc, const char* argv[]) {
   DumpWritable writable;
-  DumpWritable writable;
   const TestWritableResult* r = writable.init(TestWritableResult::OK());
   if (r->hasError) {
     fprintf(stderr, "Encountered writable init error: %s\n", r->errorMsg);
