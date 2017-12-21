@@ -1,6 +1,6 @@
 {
   "name": "rapidjson-writable",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "API to rapidjson that supports writing data asynchronously.",
   "files": [
     "include/",
