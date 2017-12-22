@@ -18,6 +18,12 @@ class RapidjsonWritable {
     RapidjsonWritable() 
       : stream_(work_), initialized_(false) {}
 
+    ~RapidjsonWritable() {
+      if (initialized_) {
+        uv_mutex_destroy(&work_.mutex);
+      }
+    }
+
     //
     // init, write and wait run on Writer (main) thread
     //
